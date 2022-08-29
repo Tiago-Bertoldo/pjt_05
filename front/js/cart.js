@@ -1,5 +1,4 @@
 // Afficher un tableau récapitulatif des achats dans la page Panier
-
 // Appelle API pour tous les information du obj
 getApiValues = () => {
     fetch('http://localhost:3000/api/products')
@@ -13,9 +12,7 @@ getApiValues = () => {
         console.log(err)
     })
 }
-
-
-// Create Obj avec tous les information
+//CREATE OBJ AVEC TOUS LES INFORMATION
 function newValues (nom , qta , price , img , color , id) {
     this.nom = nom,
     this.qta = qta,
@@ -27,31 +24,24 @@ function newValues (nom , qta , price , img , color , id) {
         nom , qta , price , img , color , id
     }
 }
-
-// setArrayInfoValues
+//SET ARRAY INFOVALUES
 setArrayInfo = (e) => {
     let newAddItem;
     let old_values = JSON.parse(localStorage.getItem('values'))
     let valueArray = [];
-    let calcPP ;
     for (let i of old_values) {
         for (let x of e){
             if(i.id === x._id){
                newAddItem = new newValues ( x.name , i.qta , x.price , x.imageUrl , i.colors , i.id) ;
                valueArray.push(newAddItem)               
            }
-
         }
     }
-    
     return afficheProduit(valueArray) , btnDell(e)
-    
-
 }
-// affiche tous le produit
+//AFFICHE TOUS LE PRODUIT
 afficheProduit = (e) => {
     let cartItems = document.querySelector('#cart__items')
-    let getSet = document.querySelector('.cart__item')
     let totalPrice = document.querySelector('#totalPrice')
     let somaDiv = 0 
     for ( let i of e) {
@@ -84,7 +74,6 @@ afficheProduit = (e) => {
         let p2 = document.createElement('p')
         p2.textContent = `${i.price } € `
         contentDescription.appendChild(p2)
-
         // SET CONTENT SETTINGS
         let contentSettings = document.createElement('div')
         contentSettings.setAttribute('class' , 'cart__item__content__settings')
@@ -100,27 +89,22 @@ afficheProduit = (e) => {
         inputValue.setAttribute('class' , 'itemQuantity')
         inputValue.setAttribute('min' , '1')
         inputValue.setAttribute('max' , '100')
-        inputValue.setAttribute('value' , '0')
+        inputValue.setAttribute('value' , `${i.qta}`)
         contentSettingsQta.appendChild(inputValue)
-
            // SET CONTENT SETTINGS DELETE
         let contentSettingsDel = document.createElement('div')
         contentSettingsDel.setAttribute('class' , 'cart__item__content__settings__delete')
         contentSettings.appendChild(contentSettingsDel)
-
         let inputDell = document.createElement('p')
         inputDell.setAttribute('class' , 'deleteItem')
         inputDell.innerHTML = 'Supprimer'
         contentSettingsDel.appendChild(inputDell)
-
         somaDiv += i.qta * i.price
-
         totalPrice.textContent = somaDiv
     }
-    
     return calculeQta (e) , getEventClick(e) 
 }
-// Array resposable pour creer les nouveux produits
+//ARRAY RESPOSABLE POUR CREER LES NOUVEUX PRODUITS
 function setValues (id , colors , qta){
     this.id = id;
     this.colors = colors,
@@ -129,20 +113,16 @@ function setValues (id , colors , qta){
             id , colors , qta
         }
    }  
-//  set value pour change les qta avec le event Change
+   //SET VALUE POUR CHANGER LES QTA AVEC LE EVENT CHANGE
    getEventClick = (z) => {
         const values = z
-        let somaDiv = 0
-        let totalPrice = document.querySelector('#totalPrice')
         let old_values = JSON.parse(localStorage.getItem('values'))
         let getCartItem = document.querySelectorAll('.cart__item')
-        let getBtnChange = document.querySelectorAll('.itemQuantity')
         let getTagP = document.querySelectorAll('.cart__item .cart__item__content__settings__quantity > p')
         let getId ;
         let getColor;
         let getNewValue;
-        let getQta ;
-        //Get les valeur dans la tag Item ID ET COLOR
+        //GET LES VALEURS DANS LA TAG ITEM ID ET COLOR
         for (let i of getCartItem) {
             i.addEventListener('change' , e => {
                 getId = i.dataset.id
@@ -158,15 +138,13 @@ function setValues (id , colors , qta){
             })        
         }
    }
-// affiche values des qta + price
-   calculeQta = (e , somaDiv ) => {
+   //AFFICHE LES VALUES DES QTA ET PRICE
+   calculeQta = (e) => {
     let old_values = JSON.parse(localStorage.getItem('values'))
     let totalQuantity = document.querySelector('#totalQuantity')
     let totalPrice = document.querySelector('#totalPrice')
     let artC = 0;
     let soma = 0;
-    let qta;
-    let calculeTotal ;
     for(let i of old_values ) {
         artC += Number(i.qta)
         qta = i.qta
@@ -174,12 +152,10 @@ function setValues (id , colors , qta){
             soma = artC * x.price
         }
     }
-
     totalQuantity.textContent = artC
     totalPrice.textContent = soma
 }
-  
-// Delete array avec les produits
+//DELETE ARRAY AVEC LES PRODUITS
    btnDell = (e) => {
     let getCout = document.querySelectorAll('.cart__item')
     let old_values = JSON.parse(localStorage.getItem('values'))
@@ -197,18 +173,7 @@ function setValues (id , colors , qta){
             }
         })
     }
-
-    
-    
-    
 }
-
-// Validation Item Formulaire
-
-isValid = (value) => {
-    return /[a-z]/.test(value);
-}
-
 //CREATE OBJ UTILISATEUR
 function utilisateur (firstName , lastName , address , city , email , products) {
     this.contact  = {
@@ -220,6 +185,7 @@ function utilisateur (firstName , lastName , address , city , email , products) 
     }
     this.products = products
 }
+//VALIDATION DE TOUS LES INPUT DU FORMLAIRE
 validationDate = () => {
     let isValid = false
     let btnSubmit = document.querySelector('#order')
@@ -228,7 +194,6 @@ validationDate = () => {
     let inpAdress = document.querySelector('#address')
     let inpCity = document.querySelector('#city')
     let inpEmail = document.querySelector('#email')
-
     //SET TEXT MSG
     let fistNameMsg = document.querySelector('#firstNameErrorMsg')
     let msgPrenom = document.querySelector('#lastNameErrorMsg')
@@ -243,86 +208,87 @@ validationDate = () => {
     btnSubmit.addEventListener('click' , e => {
         e.preventDefault()
         if(!/[a-z]/.test(inpFirst.value)) {
-            fistNameMsg.textContent = 'Msg Error'
+            fistNameMsg.textContent = 'Svp , verifier les champ Nom'
+            isValid = false
         }else {
             prenom = inpFirst.value
             fistNameMsg.textContent = ''
             isValid = true
         }
         if(!/[a-z]/.test(inpLast.value)) {
-            msgPrenom.textContent = 'Msg Error'
+            msgPrenom.textContent = 'Svp , verifier les champ Prenom'
+            isValid = false
         }else {
             nom = inpLast.value
             msgPrenom.textContent = ''
             isValid = true
         }
-        if(!/[a-z]/.test(inpAdress.value)) {
-            msgAdress.textContent = 'Msg Error'
+        if(!/[a-zA-Z0-9]+/.test(inpAdress.value)) {
+            msgAdress.textContent = 'Svp , verifier les champ Adress'
+            isValid = false
         }else {
             address = inpAdress.value
             msgAdress.textContent = ''
             isValid = true
         }
         if(!/[a-z]/.test(inpCity.value)) {
-            msgCity.textContent = 'Msg Error'
+            msgCity.textContent = 'Svp , verifier les champ City'
+            isValid = false
         }else {
             city = inpCity.value
             msgCity.textContent = ''
             isValid = true
         }
         if(!/@/gm.test(inpEmail.value)) {
-            msgEmil.textContent = 'Msg Error'
+            msgEmil.textContent = 'Svp , verifier les champ Email'
+            isValid = false
         }else {
             email = inpEmail.value
             msgEmil.textContent = ''
             isValid = true
         }
-
-
-      if(isValid) {
-          const old_values = JSON.parse(localStorage.getItem('values'))
-          const newTablet = []
-          const contacts = new utilisateur(prenom , nom  , address , city , email , newTablet)
-            for(let i of old_values) {
-                newTablet.push(i.id)
+            if(isValid) {
+                const old_values = JSON.parse(localStorage.getItem('values'))
+                const newTablet = []
+                const contacts = new utilisateur(prenom , nom  , address , city , email , newTablet)
+                for(let i of old_values) {
+                        newTablet.push(i.id)
+                    }
+                    fetch("http://localhost:3000/api/products/order", {
+                    method: "POST",
+                    headers: { 
+                    "Accept": "application/json", 
+                    "Content-type": "application/json; charset=UTF-8"
+                },  
+                    body : 
+                        JSON.stringify(contacts)
+                })
+                .then(function (res) {
+                    if(res.ok) {
+                        return res.json()
+                    }
+                })
+                .then(function(e){
+                    setNewPage(e)
+                })
+                .catch(function(e){
+                    console.log(e)
+                })
             }
-        
-         fetch("http://localhost:3000/api/products/order", {
-        	method: "POST",
-            headers: { 
-            "Accept": "application/json", 
-            "Content-type": "application/json; charset=UTF-8"
-        },  
-            body : 
-                JSON.stringify(contacts)
-        })
-        .then(function (res) {
-            if(res.ok) {
-                return res.json()
-            }
-        })
-        .then(function(e){
-            setNewPage(e)
-        })
-        .catch(function(e){
-            console.log(e)
-        })
-    }
-    })
-
+            })
 }
 
+//TRANSFER VERS LA PAGE DE CONFIRMATION D'ACHAT
 setNewPage = (e) => {
     localStorage.clear('values')
     window.location.href = `confirmation.html?order=${e.orderId}`    
 }
 
-
-
+// START ALGORITME
 main = () => {
     getApiValues();
     validationDate();
 }
 
-main();
+window.addEventListener('load' , main())
 

@@ -1,3 +1,5 @@
+
+// EXECUTE LE REQUETE VERS L'API
 function requeteApi (){
     fetch('http://localhost:3000/api/products')
     .then(function(e){
@@ -12,6 +14,8 @@ function requeteApi (){
 
 }
 
+
+// SET TOUS LES PRODUITS AVEC LA REPONSE DE L'API
 function getDados(products){
     let item = document.querySelector('#items')
     for(let af of products){

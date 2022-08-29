@@ -5,8 +5,6 @@ getIdOrder = ( getUrl) => {
     getMsgOrder.textContent = retUrl
 }
 
-
-
 // GET LE URL DE LA PAGE
 function recebUrl() {
     const getUrl = window.location.href
