@@ -1,15 +1,35 @@
-# Kanap #
+<strong>PROJET KANAP</strong>
 
-This is the front end and back end server for Project 5 of the Web Developer path.
+<strong>Contexte</strong><br>
+Le client, Kanap, est une marque de canapés. 
+Il souhaite avoir une plateforme de e-commerce en plus de sa boutique physique pour vendre ses produits sur Internet.
 
-### Back end Prerequisites ###
+<string>Les étapes de la réalisation</string> <br>
+Prendre en main les maquettes HTML / CSS
+Manipuler l’API (lire le ReadMe du repo GitHub fourni, )
+Insérer les produits dans la page d’accueil
+Faire le lien entre un produit de la page d’accueil et la page Produit
+Récupérer l’id du produit à afficher
+Insérer un produit et ses détails dans la page Produit
+Ajouter des produits dans le panier
+Afficher un tableau récapitulatif des achats dans la page Panier
+Gérer la modification et la suppression de produits dans la page Panier
+Passer la commande
+Afficher le numéro de commande
+Mettre en place le plan de test d’acceptation
+<strong>Technologies utilisées</strong><br>
+HTML
+CSS
+JavaScript
 
-You will need to have Node and `npm` installed locally on your machine.
+<strong> Ma rétrospective sur le projet</strong><br>
+Ce projet a été l’occassion pour moi de mettre en pratique mes conaissances en JavaScript. J’y ai appris :
+<br>
+Rendre un site dynamique
+Consommer une API
+Manipuler le DOM en JavaScript
+Utiliser URLSearchParams
+Manipuler le local storage en JavaScript
 
-### Back end Installation ###
 
-Clone this repo. From the "back" folder of the project, run `npm install`. You 
-can then run the server with `node server`. 
-The server should run on `localhost` with default port `3000`. If the
-server runs on another port for any reason, this is printed to the
-console when the server starts, e.g. `Listening on port 3001`.
+Site exemple : (https://www.thbertoldo.tech/canape/)
